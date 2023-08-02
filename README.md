@@ -26,6 +26,15 @@ Because there are application tests is involving test DB, there is need to popul
 1. `php bin/console --env=test doctrine:fixtures:load` to populate test DB
 2. `php bin/phpunit` to run unit tests
 
+## PHPCS & PHPStan 
+PHP cs fixer: 
+`tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src`
+`tools/php-cs-fixer/vendor/bin/php-cs-fixer fix tests`
+
+PHP Stan: 
+`vendor/bin/phpstan analyse src tests`
+
+
 ## Requests
 ### POST /cars
 Checks of the request are performed on the level of validators and before insertions into DB. That assures for example, that there is no possibility of adding non-existent id to db. 

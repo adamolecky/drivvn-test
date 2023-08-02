@@ -49,7 +49,7 @@ class CarController extends AbstractController
         return new JsonResponse($this->carResponseFactory->fromEntityToCarResponse($carEntity));
     }
 
-    #[Route('/car/{id}', name: 'app_car_show', methods: ['GET'])]
+    #[Route('/car/{carId}', name: 'app_car_show', methods: ['GET'])]
     public function show(?string $carId = null): Response
     {
         if ((int)$carId === 0) {
@@ -63,7 +63,7 @@ class CarController extends AbstractController
         return new JsonResponse(['error' => 'Not found.'], 404);
     }
 
-    #[Route('/cars/{id}', name: 'app_car_delete', methods: ['DELETE'])]
+    #[Route('/cars/{carId}', name: 'app_car_delete', methods: ['DELETE'])]
     public function delete(?string $carId): Response
     {
         if ((int)$carId === 0) {
@@ -71,7 +71,7 @@ class CarController extends AbstractController
         }
 
         try {
-            $this->carFacade->remove($carId);
+            $this->carFacade->remove((int)$carId);
         } catch (CarNotFoundException) {
             return new JsonResponse(['error' => 'Id was not found.'], 404);
         }

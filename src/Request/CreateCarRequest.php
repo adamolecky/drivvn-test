@@ -19,20 +19,28 @@ class CreateCarRequest extends BaseRequest
     #[Type('string')]
     #[NotBlank()]
     public string $model;
+
     #[NotBlank()]
     #[DateTime]
     public string $build_at;
+
+    /**
+     * @var string[]
+     */
     #[Type('array')]
     public ?array $colours = null;
 
+    /**
+     * @return array<string, array<int, array<string, string>>|string>
+     */
     public function validate(): array
     {
         $errors = parent::validate();
 
         $buildAt = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $this->build_at);
         $deadline = (new DateTimeImmutable())->modify('-4 years');
-
-        if ($buildAt && $buildAt->diff($deadline)->y >= 5) {
+        $diff = $buildAt->diff($deadline);
+        if ($diff->invert === 0) {
             $errors['errors'][] = [
                 'property' => 'build_at',
                 'value' => $this->build_at,

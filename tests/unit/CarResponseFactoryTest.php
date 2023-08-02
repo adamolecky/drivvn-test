@@ -19,18 +19,21 @@ final class CarResponseFactoryTest extends TestCase
     private CarResponseFactory $carResponseFactory;
 
     /**
-     * @return array
+     * @return array<mixed>
      */
     public function createCarMock(): array
     {
         $car = Mockery::mock(Car::class);
-        $car->expects('getId')->andReturn(1);
-        $car->expects('getMake')->andReturn('make');
-        $car->expects('getModel')->andReturn('model');
+        $car->shouldReceive('getId')->andReturn(1);
+        $car->shouldReceive('getMake')->andReturn('make');
+        $car->shouldReceive('getModel')->andReturn('model');
         $dateTimeImmutable = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', "2021-08-02 13:37:55");
-        $car->expects('getBuildAt')->andReturn($dateTimeImmutable);
-        $car->expects('getColours')->andReturn(new ArrayCollection());
-        return array($car, $dateTimeImmutable);
+        $car->shouldReceive('getBuildAt')->andReturn($dateTimeImmutable);
+        $car->shouldReceive('getColours')->andReturn(new ArrayCollection());
+        /**
+         * @var Car $car
+         */
+        return [$car, $dateTimeImmutable];
     }
 
     /**
@@ -54,7 +57,6 @@ final class CarResponseFactoryTest extends TestCase
     {
         parent::setUp();
 
-        /** @todo Correctly instantiate tested object to use it. */
         $this->carResponseFactory = new CarResponseFactory();
     }
 

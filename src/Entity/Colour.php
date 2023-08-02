@@ -19,6 +19,9 @@ class Colour
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    /**
+     * @var Collection<int, Car>
+     */
     #[ManyToMany(targetEntity: Car::class, mappedBy: 'colours')]
     private Collection $cars;
 
@@ -44,14 +47,12 @@ class Colour
         return $this;
     }
 
+    /**
+     * @return Collection<int, Car>
+     */
     public function getCars(): Collection
     {
         return $this->cars;
-    }
-
-    public function setCars(Collection $cars): void
-    {
-        $this->cars = $cars;
     }
 
 }

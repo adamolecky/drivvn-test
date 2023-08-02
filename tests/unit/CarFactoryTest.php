@@ -7,7 +7,9 @@ use App\EntityFactory\CarFactory;
 use App\Repository\ColourRepository;
 use DateTimeImmutable;
 use Mockery;
+use Mockery\LegacyMockInterface;
 use Mockery\Mock;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 /**

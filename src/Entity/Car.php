@@ -26,6 +26,9 @@ class Car
     #[ORM\Column]
     private ?\DateTimeImmutable $build_at = null;
 
+    /**
+     * @var Collection<int, Colour>
+     */
     #[ManyToMany(targetEntity: Colour::class, inversedBy: 'cars')]
     #[JoinTable(name: 'car_colours')]
     private Collection $colours;
@@ -76,6 +79,9 @@ class Car
         return $this;
     }
 
+    /**
+     * @return Collection<int, Colour>
+     */
     public function getColours(): Collection
     {
         return $this->colours;

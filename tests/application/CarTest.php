@@ -5,7 +5,6 @@ use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 
 class CarTest extends ApiTestCase
 {
-
     public function testListing(): void
     {
         //Get list of cars

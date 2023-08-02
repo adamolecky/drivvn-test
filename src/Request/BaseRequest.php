@@ -14,7 +14,7 @@ abstract class BaseRequest
     }
 
     /**
-     * @return string[]
+     * @return array<string, array<int, array<string, string>>|string>
      */
     public function validate(): array
     {
@@ -22,12 +22,12 @@ abstract class BaseRequest
 
         $messages = ['message' => 'validation_failed', 'errors' => []];
 
-        /** @var \Symfony\Component\Validator\ConstraintViolation  */
+        /** @var \Symfony\Component\Validator\ConstraintViolation $message */
         foreach ($errors as $message) {
             $messages['errors'][] = [
-                'property' => $message->getPropertyPath(),
-                'value' => $message->getInvalidValue(),
-                'message' => $message->getMessage(),
+                'property' => (string)$message->getPropertyPath(),
+                'value' => (string)$message->getInvalidValue(),
+                'message' => (string)$message->getMessage(),
             ];
         }
 

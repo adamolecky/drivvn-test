@@ -42,13 +42,14 @@ final class CarResponseTest extends TestCase
     public function testFillFromEntity(): void
     {
         $car = Mockery::mock(Car::class);
-        $car->expects('getId')->andReturn(1);
-        $car->expects('getMake')->andReturn('make');
-        $car->expects('getModel')->andReturn('model');
+        $car->shouldReceive('getId')->andReturn(1);
+        $car->shouldReceive('getMake')->andReturn('make');
+        $car->shouldReceive('getModel')->andReturn('model');
         $dateTimeImmutable = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', "2021-08-02 13:37:55");
-        $car->expects('getBuildAt')->andReturn($dateTimeImmutable);
-        $car->expects('getColours')->andReturn(new ArrayCollection());
+        $car->shouldReceive('getBuildAt')->andReturn($dateTimeImmutable);
+        $car->shouldReceive('getColours')->andReturn(new ArrayCollection());
 
+        /** @var Car $car */
         $carResponse = $this->carResponse->fillFromEntity($car);
 
         self::assertSame($carResponse->id, 1);

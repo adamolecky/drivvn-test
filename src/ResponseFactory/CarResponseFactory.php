@@ -4,7 +4,6 @@ namespace App\ResponseFactory;
 
 use App\Entity\Car;
 use App\Response\CarResponse;
-use Doctrine\Common\Collections\Collection;
 
 class CarResponseFactory
 {
@@ -14,8 +13,8 @@ class CarResponseFactory
     }
 
     /**
-     * @param Car[] $collection
-     * @return CarResponse[]|null
+     * @param Car[] $cars
+     * @return CarResponse[]
      */
     public function fromEntitiesToCarResponse(array $cars): array
     {

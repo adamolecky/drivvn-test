@@ -26,9 +26,7 @@ class ColourFixtures extends Fixture
             $manager->persist($colour);
         }
         $manager->flush();
-        if (isset($colour)) {
-            $this->addReference(self::RED_COLOUR_REFERENCE, $colour);
-        }
+        $this->addReference(self::RED_COLOUR_REFERENCE, $colour);
     }
 
 }
