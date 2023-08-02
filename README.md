@@ -26,7 +26,42 @@ Because there are application tests is involving test DB, there is need to popul
 1. `php bin/console --env=test doctrine:fixtures:load` to populate test DB
 2. `php bin/phpunit` to run unit tests
 
-##
+## Requests
+### POST /cars
+Checks of the request are performed on the level of validators and before insertions into DB. That assures for example, that there is no possibility of adding non-existent id to db. 
+
+```
+curl --location --request POST 'http://localhost/cars' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "make": "skoda",
+    "model": "a6",
+    "build_at": "2010-08-02 13:37:55",
+    "colours": [1]
+}'
+```
+### GET /car/<id>
+```
+curl --location --request GET 'http://localhost/car/1'
+```
+### DELETE /cars/<id>
+```
+curl --location --request DELETE 'http://localhost/cars/1'
+```
+### GET /cars
+```
+curl --location --request GET 'http://localhost/cars'
+```
+
+## Optional
+
+### How to document API? 
+Best course of action seems like Swagger OpenApi. With Swagger UI we could generate page, that could serve users both as testing range for request and documentation. (https://github.com/swagger-api/swagger-ui)
+
+### How can extra data models improve design? 
+Because entities and models represents real world scenarios it is hard to say what would be best course of action. But we can see that there are car params: make and model. Assuming that there could be more cars from one maker and more than one model we are would have problems with data redundancy. Meaning there would be multiple rows with same or inconsistent values. Therefore creating maker entity and model entity could solve this issue. Relations could for example : 
+
+car -> many to one -> model -> many to one -> maker (assuming that one model is made only by one maker)
 
 ## Summary
-That should be enough to run test project. After loading fixtures it should contain one car, 4 colors (colours) in app DB. 
+That should be enough to run test project. After loading fixtures it should contain one car, 4 colors (colours) in app DB. I also made little change on naming preferences for build date param, where i used build_at (which is by default accepted by doctrine orm as datetime format). 
