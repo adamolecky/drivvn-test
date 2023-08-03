@@ -5,7 +5,7 @@ This is test project for Drivvn company done by Adam Olecký. Project runs in do
 
 1. Run `docker compose up --build --force-recreate -d` (no need to force recreate or build flags fo fist run, but generally this is also 'reset images and containers' command)
 2. Open `http://localhost` in your favorite web browser (SSL certificate is self-signed. Postman is working, but browsers could have problem)
-3. Cli to php container to run commands: `docker exec -it symfony-docker-php-1 /bin/sh`
+3. Cli to php container to run commands: `docker exec -it drivvn-test-php-1 /bin/sh`
 
 ## What's next?
 
